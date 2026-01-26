@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Valentines Day</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Dalfitra font - ensure you have the font files in the 'fonts' folder */
+    @font-face {
+      font-family: 'Dalfitra';
+      src: url('./fonts/dalfitra.otf') format('woff2'),
+           url('./fonts/dalfitra.ttf') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+    .gradient-background {
+      background: #d16ad1;
+    }
+    .bounce2 {
+      animation: bounce2 2s ease infinite;
+    }
+    @keyframes bounce2 {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+      }
+      40% {
+        transform: translateY(-20px);
+      }
+      60% {
+        transform: translateY(-10px);
+      }
+    }
+    .romantic-text {
+      font-family: 'Playfair Display', serif;
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    }
+    /* Use Dalfitra for the main Valentine text */
+    #valentineQuestion {
+      font-family: 'Dalfitra', sans-serif;
+    }
+    .header-container {
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+    }
+    .header-image {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      margin: auto;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body class="gradient-background flex flex-col items-center justify-center h-screen">
+  <!-- Main Content Container -->
+  <div id="contentContainer" class="flex flex-col items-center p-6 mt-6 bg-white shadow-xl rounded-xl">
+    <img id="imageDisplay" src="./Images/Couple 1.jpg" alt="You and your girlfriend" class="rounded-md h-[300px] shadow-lg" style="object-fit: cover;" />
+    <h2 id="valentineQuestion" class="text-4xl font-bold italic text-[#6D1E59] my-4 romantic-text">Will you be my Valentine?</h2>
+    <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
+      <button id="yesButton"
+        class="bounce2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium disabled:pointer-events-none disabled:opacity-50 hover:bg-green-400 min-h-12 min-w-[75px] px-4 py-2 bg-green-500 text-white transition shadow-lg">
+        Yes
+      </button>
+      <button id="noButton"
+        class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-[20px] font-medium transition disabled:pointer-events-none disabled:opacity-50 hover:bg-red-700 h-12 min-w-[75px] w-auto px-4 py-2 bg-red-500 text-white shadow-lg">
+        No
+      </button>
+    </div>
+  </div>
+  
+  <!-- Hidden Love Message - will be shown after clicking Yes -->
+  <p id="loveMessage" class="mt-6 text-white text-2xl romantic-text" style="display: none;">Forever and always, just you and me ❤️</p>
+  
+  <script type="module">
+    import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    const imageDisplay = document.getElementById('imageDisplay');
+    const valentineQuestion = document.getElementById('valentineQuestion');
+    const responseButtons = document.getElementById('responseButtons');
+    const contentContainer = document.getElementById('contentContainer');
+    const loveMessage = document.getElementById('loveMessage');
+  
+    let noClickCount = 0;
+    let buttonHeight = 48;
+    let buttonWidth = 80;
+    let fontSize = 20;
+    const imagePaths = [ 
+      "./Images/Couple 1.jpg",
+      "./Images/Couple 2.jpg",
+      "./Images/Couple 3.JPG",
+      "./Images/Couple 4.JPG",
+      "./Images/Couple 5.jpg",
+      "./Images/Couple 7.jpg"
+    ];  
+    
+    noButton.addEventListener('click', function() {
+      if (noClickCount < 5) {
+        noClickCount++;
+        imageDisplay.src = imagePaths[noClickCount];
+        buttonHeight += 35;
+        buttonWidth += 35;
+        fontSize += 25;
+        yesButton.style.height = `${buttonHeight}px`;
+        yesButton.style.width = `${buttonWidth}px`;
+        yesButton.style.fontSize = `${fontSize}px`;
+        if (noClickCount < 6) {
+          noButton.textContent = ["No", "Are you sure?", "Pookie please", "Don't do this to me :(", "You're breaking my heart", "I'm gonna cry..."][noClickCount];
+        }
+      }
+    });
+    
+    yesButton.addEventListener('click', () => {
+      valentineQuestion.style.display = "none";
+      responseButtons.style.display = "none";
+      imageDisplay.style.display = "none";
+      
+      const videoElement = document.createElement("video");
+      videoElement.src = "./Images/Couple 6.mp4";
+      videoElement.autoplay = true;
+      videoElement.loop = true;
+      videoElement.muted = true;
+      videoElement.classList.add("rounded-md", "shadow-lg", "fade-in");
+      videoElement.style.width = "100%";
+      videoElement.style.maxWidth = "300px";
+      
+      contentContainer.appendChild(videoElement);
+      confetti({ particleCount: 200, spread: 100 });
+      
+      // Show the love message after pressing "Yes"
+      loveMessage.style.display = "block";
+    });
+  </script>  
+</body>
+</html>
