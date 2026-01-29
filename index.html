@@ -61,7 +61,7 @@
 <body class="gradient-background flex flex-col items-center justify-center h-screen">
   <!-- Main Content Container -->
   <div id="contentContainer" class="flex flex-col items-center p-6 mt-6 bg-white shadow-xl rounded-xl">
-    <img id="imageDisplay" src="./Images/1 (2).jpeg" alt="You and your girlfriend" class="rounded-md h-[300px] shadow-lg" style="object-fit: cover;" />
+    <img id="imageDisplay" src="./images/1 (2).jpeg" alt="You and your girlfriend" class="rounded-md h-[300px] shadow-lg" style="object-fit: cover;" />
     <h2 id="valentineQuestion" class="text-4xl font-bold italic text-[#6D1E59] my-4 romantic-text">Will you be my Valentine?</h2>
     <div class="flex gap-4 pt-[20px] items-center" id="responseButtons">
       <button id="yesButton"
@@ -93,12 +93,12 @@
     let buttonWidth = 80;
     let fontSize = 20;
     const imagePaths = [ 
-      "./Images/1 (2).jpeg",
-      "./Images/2.jpeg",
-      "./Images/3 (2).jpeg",
-      "./Images/4 (2).jpeg",
-      "./Images/5 (2).jpeg",
-      "./Images/6.jpeg"
+      "./images/1 (2).jpeg",
+      "./images/2.jpeg",
+      "./images/3 (2).jpeg",
+      "./images/4 (2).jpeg",
+      "./images/5 (2).jpeg",
+      "./images/6.jpeg"
     ];  
     
     noButton.addEventListener('click', function() {
@@ -123,7 +123,7 @@
       imageDisplay.style.display = "none";
       
       const videoElement = document.createElement("video");
-      videoElement.src = "./Images/7.mp4;
+      videoElement.src = "./images/7.mp4;
       videoElement.autoplay = true;
       videoElement.loop = true;
       videoElement.muted = true;
